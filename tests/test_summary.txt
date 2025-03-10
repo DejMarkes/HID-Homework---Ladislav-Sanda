@@ -1,0 +1,113 @@
+Unfortunately i am unable to run most of the functions using Windows dll and linux library using WSL 2.0
+
+Windows crash report:
+
+Log Name:      Application
+Source:        Application Error
+Date:          10/03/2025 20:10:35
+Event ID:      1000
+Task Category: Application Crashing Events
+Level:         Error
+Keywords:      
+User:          E-BTLNET\sandal
+Computer:      MT-NTB-DHM_4BF.e-btlnet.local
+Description:
+Faulting application name: python.exe, version: 3.13.2150.1013, time stamp: 0x67a22e94
+Faulting module name: ucrtbase.dll, version: 10.0.22621.3593, time stamp: 0x84b62951
+Exception code: 0xc0000409
+Fault offset: 0x0009e3bb
+Faulting process ID: 0x0x5D4C
+Faulting application start time: 0x0x1DB91F019C18710
+Faulting application path: C:\Users\sandal\AppData\Local\Programs\Python\Python313-32\python.exe
+Faulting module path: C:\Windows\System32\ucrtbase.dll
+Report ID: 29de8ce3-ebab-4a29-af78-97add1d7d70c
+Faulting package full name: 
+Faulting package-relative application ID: 
+Event Xml:
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+  <System>
+    <Provider Name="Application Error" Guid="{a0e9b465-b939-57d7-b27d-95d8e925ff57}" />
+    <EventID>1000</EventID>
+    <Version>0</Version>
+    <Level>2</Level>
+    <Task>100</Task>
+    <Opcode>0</Opcode>
+    <Keywords>0x8000000000000000</Keywords>
+    <TimeCreated SystemTime="2025-03-10T19:10:35.4734786Z" />
+    <EventRecordID>131666</EventRecordID>
+    <Correlation />
+    <Execution ProcessID="6260" ThreadID="21252" />
+    <Channel>Application</Channel>
+    <Computer>MT-NTB-DHM_4BF.e-btlnet.local</Computer>
+    <Security UserID="S-1-5-21-1288946638-2127570548-932208109-30709" />
+  </System>
+  <EventData>
+    <Data Name="AppName">python.exe</Data>
+    <Data Name="AppVersion">3.13.2150.1013</Data>
+    <Data Name="AppTimeStamp">67a22e94</Data>
+    <Data Name="ModuleName">ucrtbase.dll</Data>
+    <Data Name="ModuleVersion">10.0.22621.3593</Data>
+    <Data Name="ModuleTimeStamp">84b62951</Data>
+    <Data Name="ExceptionCode">c0000409</Data>
+    <Data Name="FaultingOffset">0009e3bb</Data>
+    <Data Name="ProcessId">0x5d4c</Data>
+    <Data Name="ProcessCreationTime">0x1db91f019c18710</Data>
+    <Data Name="AppPath">C:\Users\sandal\AppData\Local\Programs\Python\Python313-32\python.exe</Data>
+    <Data Name="ModulePath">C:\Windows\System32\ucrtbase.dll</Data>
+    <Data Name="IntegratorReportId">29de8ce3-ebab-4a29-af78-97add1d7d70c</Data>
+    <Data Name="PackageFullName">
+    </Data>
+    <Data Name="PackageRelativeAppId">
+    </Data>
+  </EventData>
+</Event>
+
+Using WSL Python seems to crash on HashStatus, HashStop and HashDirectory functions
+
+PS C:\Users\sandal\Documents\HID-Homework---Ladislav-Sanda\tests> C:\Users\sandal\AppData\Local\Programs\Python\Python313-32\python.exe -m pytest -v -s test.py
+================================================================================= test session starts =================================================================================
+platform win32 -- Python 3.13.2, pytest-8.3.5, pluggy-1.5.0 -- C:\Users\sandal\AppData\Local\Programs\Python\Python313-32\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\sandal\Documents\HID-Homework---Ladislav-Sanda\tests
+collected 3 items
+
+test.py::test_hash_init_and_terminate PASSED
+test.py::test_hash_status Fatal Python error: Aborted
+
+Thread 0x0000300c (most recent call first):
+  File "C:\Users\sandal\Documents\HID-Homework---Ladislav-Sanda\tests\test.py", line 67 in waitForHashStatus
+  File "C:\Users\sandal\Documents\HID-Homework---Ladislav-Sanda\tests\test.py", line 122 in test_hash_status
+  File "C:\Users\sandal\AppData\Local\Programs\Python\Python313-32\Lib\site-packages\_pytest\python.py", line 159 in pytest_pyfunc_call
+  File "C:\Users\sandal\AppData\Local\Programs\Python\Python313-32\Lib\site-packages\pluggy\_callers.py", line 103 in _multicall
+  File "C:\Users\sandal\AppData\Local\Programs\Python\Python313-32\Lib\site-packages\pluggy\_manager.py", line 120 in _hookexec
+  File "C:\Users\sandal\AppData\Local\Programs\Python\Python313-32\Lib\site-packages\pluggy\_hooks.py", line 513 in __call__
+  File "C:\Users\sandal\AppData\Local\Programs\Python\Python313-32\Lib\site-packages\_pytest\python.py", line 1627 in runtest
+  File "C:\Users\sandal\AppData\Local\Programs\Python\Python313-32\Lib\site-packages\_pytest\runner.py", line 174 in pytest_runtest_call
+  File "C:\Users\sandal\AppData\Local\Programs\Python\Python313-32\Lib\site-packages\pluggy\_callers.py", line 103 in _multicall
+  File "C:\Users\sandal\AppData\Local\Programs\Python\Python313-32\Lib\site-packages\pluggy\_manager.py", line 120 in _hookexec
+  File "C:\Users\sandal\AppData\Local\Programs\Python\Python313-32\Lib\site-packages\pluggy\_hooks.py", line 513 in __call__
+  File "C:\Users\sandal\AppData\Local\Programs\Python\Python313-32\Lib\site-packages\_pytest\runner.py", line 242 in <lambda>
+  File "C:\Users\sandal\AppData\Local\Programs\Python\Python313-32\Lib\site-packages\_pytest\runner.py", line 341 in from_call
+  File "C:\Users\sandal\AppData\Local\Programs\Python\Python313-32\Lib\site-packages\_pytest\runner.py", line 241 in call_and_report
+  File "C:\Users\sandal\AppData\Local\Programs\Python\Python313-32\Lib\site-packages\_pytest\runner.py", line 132 in runtestprotocol
+  File "C:\Users\sandal\AppData\Local\Programs\Python\Python313-32\Lib\site-packages\_pytest\runner.py", line 113 in pytest_runtest_protocol
+  File "C:\Users\sandal\AppData\Local\Programs\Python\Python313-32\Lib\site-packages\pluggy\_callers.py", line 103 in _multicall
+  File "C:\Users\sandal\AppData\Local\Programs\Python\Python313-32\Lib\site-packages\pluggy\_manager.py", line 120 in _hookexec
+  File "C:\Users\sandal\AppData\Local\Programs\Python\Python313-32\Lib\site-packages\pluggy\_hooks.py", line 513 in __call__
+  File "C:\Users\sandal\AppData\Local\Programs\Python\Python313-32\Lib\site-packages\_pytest\main.py", line 362 in pytest_runtestloop
+  File "C:\Users\sandal\AppData\Local\Programs\Python\Python313-32\Lib\site-packages\pluggy\_callers.py", line 103 in _multicall
+  File "C:\Users\sandal\AppData\Local\Programs\Python\Python313-32\Lib\site-packages\pluggy\_manager.py", line 120 in _hookexec
+  File "C:\Users\sandal\AppData\Local\Programs\Python\Python313-32\Lib\site-packages\pluggy\_hooks.py", line 513 in __call__
+  File "C:\Users\sandal\AppData\Local\Programs\Python\Python313-32\Lib\site-packages\_pytest\main.py", line 337 in _main
+  File "C:\Users\sandal\AppData\Local\Programs\Python\Python313-32\Lib\site-packages\_pytest\main.py", line 283 in wrap_session
+  File "C:\Users\sandal\AppData\Local\Programs\Python\Python313-32\Lib\site-packages\_pytest\main.py", line 330 in pytest_cmdline_main
+  File "C:\Users\sandal\AppData\Local\Programs\Python\Python313-32\Lib\site-packages\pluggy\_callers.py", line 103 in _multicall
+  File "C:\Users\sandal\AppData\Local\Programs\Python\Python313-32\Lib\site-packages\pluggy\_manager.py", line 120 in _hookexec
+  File "C:\Users\sandal\AppData\Local\Programs\Python\Python313-32\Lib\site-packages\pluggy\_hooks.py", line 513 in __call__
+  File "C:\Users\sandal\AppData\Local\Programs\Python\Python313-32\Lib\site-packages\_pytest\config\__init__.py", line 175 in main
+  File "C:\Users\sandal\AppData\Local\Programs\Python\Python313-32\Lib\site-packages\_pytest\config\__init__.py", line 201 in console_main
+  File "C:\Users\sandal\AppData\Local\Programs\Python\Python313-32\Lib\site-packages\pytest\__main__.py", line 9 in <module>
+  File "<frozen runpy>", line 88 in _run_code
+  File "<frozen runpy>", line 198 in _run_module_as_main
+
+  However i did complete some tests using Pytest library which should be able to run.
