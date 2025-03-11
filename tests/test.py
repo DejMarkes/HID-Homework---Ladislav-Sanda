@@ -75,15 +75,13 @@ def verify_log_line_format(log_line: str) -> bool:
 @pytest.fixture
 def setup_library():
     """Initialize and terminate the library in a test setup."""
-    # Initialize the library
     init_status = my_dll.HashInit()
     assert (
         init_status == HASH_ERROR_OK
     ), f"Failed to initialize the library, error code: {init_status}"
 
-    yield  # This allows tests to run after the library is initialized
+    yield 
 
-    # Terminate the library after the test is complete
     terminate_status = my_dll.HashTerminate()
     assert (
         terminate_status == HASH_ERROR_OK
